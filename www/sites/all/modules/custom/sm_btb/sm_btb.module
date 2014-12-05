@@ -84,6 +84,6 @@ function sm_btb_preprocess_block(&$vars) {
     $title_id                                     = $vars['block_html_id'] . '-label';
     $vars['attributes_array']['aria-labelledby']  = $title_id;
     $vars['title_attributes_array']['id']         = $title_id;
-    $vars['title_prefix']['close_button']         = array('#markup' => '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>');
+//    $vars['title_prefix']['close_button']         = array('#markup' => '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>');
   }
 }
