@@ -46,7 +46,7 @@
 $modal_header_start ='';
 $modal_header_end ='';
 if(!empty($is_tb_modal)) {
-  $modal_header_start = '<div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>';
+  $modal_header_start = '<div class="modal-header"><button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>';
   $modal_header_end   = '</div>';
 }
 ?>
