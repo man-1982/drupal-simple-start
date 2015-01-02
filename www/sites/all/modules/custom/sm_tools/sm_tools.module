@@ -2,4 +2,31 @@
 /**
  * @file
  * Main file for the SM tools module
- */ 
+ */
+
+/**
+ * helper function for render block
+ * @param $module_name
+ * @param $block_delta
+ */
+function sm_tools_render_block($module_name, $block_delta){
+  $block = block_load($module_name, $block_delta);
+  $block = _block_render_blocks(array($block));
+  $block_build = _block_get_renderable_array($block);
+  echo drupal_render($block_build);
+}
+
+/**
+ * helper function for reset form printed
+ * @param $form
+ */
+function sm_tools_reset_form_printed(&$form) {
+  foreach($form as $key => $element) {
+    if(is_array($element)) {
+      sm_tools_reset_form_printed($form[$key]);
+    }
+    if($key == '#printed') {
+      unset($form[$key]);
+    }
+  }
+}
