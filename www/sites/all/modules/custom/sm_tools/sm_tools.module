@@ -30,3 +30,42 @@ function sm_tools_reset_form_printed(&$form) {
     }
   }
 }
+
+/**
+ * // Получить ноду типа page с заголовком Foo и значением поля field_category равным 2
+$node = entity_load_by_conditions(
+'node',
+array('type' => 'page', 'title' => 'Foo'),
+array('field_category' => array('tid' => 2))
+);
+
+// Получить термин с именем Foo из словаря с vid=3
+$term = entity_load_by_conditions(
+'taxonomy_term',
+array('name' => 'Foo', 'vid' => 3)
+);
+ * Return entity object by conditions.
+ */
+function sm_tools_entity_load_by_conditions($entity_type, $properties = NULL, $fields = NULL) {
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', $entity_type);
+  if ($properties) {
+    foreach ($properties as $name => $value) {
+      $query->propertyCondition($name, $value);
+    }
+  }
+  if ($fields) {
+    foreach ($fields as $name => $values) {
+      foreach ($values as $column => $value) {
+        $query->fieldCondition($name, $column, $value);
+      }
+    }
+  }
+  $query->range(0, 1);
+  $result = $query->execute();
+  if ($result) {
+    $id = key($result[$entity_type]);
+    $entities = entity_load($entity_type, array($id));
+    return reset($entities);
+  }
+}
